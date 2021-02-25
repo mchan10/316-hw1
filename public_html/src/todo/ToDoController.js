@@ -46,4 +46,8 @@ export default class ToDoController {
         // UNLOAD THE CURRENT LIST AND INSTEAD LOAD THE CURRENT LIST
         this.model.loadList(listId);
     }
+
+    handleDescChange(){ 
+        
+    }
 }

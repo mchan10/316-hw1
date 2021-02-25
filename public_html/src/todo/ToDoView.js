@@ -63,7 +63,8 @@ export default class ToDoView {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col'>" + listItem.description + "</div>"
+                                + "<div class='task-col'>" + "<input id='inputdesc' class='input-text' value='" + listItem.description +"'>"
+                                + "</input>" + "<h4 class='list-item'>" + listItem.description + "</h4></div>"
                                 + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
                                 + "<div class='list-controls-col'>"
@@ -73,8 +74,19 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
-            itemsListDiv.innerHTML += listItemElement;
+            itemsListDiv.insertAdjacentHTML("beforeend", listItemElement);
+            let inputDesc = document.getElementById("todo-list-item-" + listItem.id).childNodes[0];
+            console.log(inputDesc);
+            inputDesc.onmousedown = function(){
+                let currentText = inputDesc.innerHTML;
+                inputDesc.getElementsByTagName("input")[0].style.display = "block";
+                inputDesc.onBlur = function(){
+                    let newText = inputDesc.innerHTML;
+                    thisController.handleDescChange();
+                }
+            }
         }
+        console.log(itemsListDiv);
     }
 
     // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES

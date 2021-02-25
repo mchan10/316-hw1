@@ -77,3 +77,7 @@
 .todo_button:hover {
     background-color: var(--swatch-contrast);
 }
+
+.input-text{
+    background-color: var(--swatch-primary);
+}
