@@ -151,8 +151,11 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
     }
 
-    removeCurrentListConfirmation(){
-        this.view.confirmDeleteButton();
+    showModal(){
+        this.view.showModal();
+    }
+    hideModal(){
+        this.view.hideModal();
     }
     /**
      * Finds and then removes the current list.
@@ -168,6 +171,7 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
+        this.view.hideModal();
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.

@@ -24,7 +24,16 @@ export default class ToDoController {
             appModel.redo();
         }
         document.getElementById("delete-list-button").onmousedown = function() {
-            appModel.removeCurrentListConfirmation();
+            appModel.showModal();
+        }
+        document.getElementById("confirm-delete-exit").onmousedown = function(){
+            appModel.hideModal();
+        }
+        document.getElementById("confirm-delete-cancel").onmousedown = function(){
+            appModel.hideModal();
+        }
+        document.getElementById("confirm-delete-confirm").onmousedown = function(){
+            appModel.removeCurrentList();
         }
         document.getElementById("add-item-button").onmousedown = function() {
             appModel.addNewItemTransaction();
