@@ -125,8 +125,11 @@ export default class ToDoModel {
                 listIndex = i;
         }
         if (listIndex >= 0) {
-            let listToLoad = this.toDoLists[listIndex];
-            this.currentList = listToLoad;
+            let listToLoad = this.toDoLists.splice(listIndex, 1);
+            this.toDoLists.unshift(listToLoad[0]);
+            console.log(this.toDoLists);
+            this.currentList = this.toDoLists[0];
+            this.view.refreshLists(this.toDoLists);
             this.view.viewList(this.currentList);
         }
     }

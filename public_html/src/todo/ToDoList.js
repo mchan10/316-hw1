@@ -78,4 +78,9 @@ export default class ToDoList {
     getItemAtIndex(index) {
         return this.items[index];
     }
+
+    moveElementToStart(item) {
+        this.removeItem(item);
+        this.items.unshift(item);
+    }
 }
