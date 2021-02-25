@@ -53,6 +53,14 @@
     border-bottom: dotted;
 }
 
+#confirm-deletion{
+    background-color: var(--swatch-primary);
+}
+
+#modal-overlay{
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
 .list-header-card {
     border-bottom: dotted;
 }

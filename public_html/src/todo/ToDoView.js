@@ -81,4 +81,9 @@ export default class ToDoView {
     setController(initController) {
         this.controller = initController;
     }
+
+    confirmDeleteButton(){
+        let modal = document.getElementById("confirm-deletion");
+        modal.display = "block";
+    }
 }

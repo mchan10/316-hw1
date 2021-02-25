@@ -151,6 +151,9 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
     }
 
+    removeCurrentListConfirmation(){
+        this.view.confirmDeleteButton();
+    }
     /**
      * Finds and then removes the current list.
      */
