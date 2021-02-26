@@ -13,7 +13,11 @@
     --swatch-text:          #e9edf0; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */ 
     --swatch-text-accent:   #ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
 
-    --font-primary:         'Lexend Exa', sans-serif;
+    --font-primary:         'Consolas';
+}
+
+body{
+    background-color: var(--swatch-foundation);
 }
 
 #grid-container {
@@ -26,12 +30,14 @@
 }
 
 #navbar {
-    box-shadow: 2px 2px 2px var(--swatch-primary); 
+    /*box-shadow: 2px 2px 2px var(--swatch-primary);*/
+    background-color: var(--swatch-foundation);
 }
 
 #left-sidebar {
     background-color: var(--swatch-complement);
     color: rgb(233,237,240);
+    height:97%;
 }
 
 #workspace {
@@ -43,6 +49,7 @@
     color: rgb(255,200,25);
     font-weight: bold;
     font-size: 14pt;
+    background-color: var(--swatch-primary);
 }
 
 #left-sidebar-header {
@@ -51,6 +58,10 @@
 
 #todo-list-table-header {
     border-bottom: dotted;
+}
+
+#todo-list-header-card{
+    border-bottom: 2px dotted;
 }
 
 #confirm-deletion{
@@ -80,4 +91,8 @@
 
 .input-text{
     background-color: var(--swatch-primary);
+}
+
+.selected-list{
+    background-color: var(--swatch-accent);
 }
