@@ -47,7 +47,7 @@ export default class ToDoController {
         this.model.loadList(listId);
     }
 
-    handleDescChange(){ 
-        
+    handleDescChange(newText, listItem){ 
+        this.model.changeTextTransaction(newText, listItem);
     }
 }

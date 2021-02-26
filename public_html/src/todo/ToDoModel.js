@@ -4,6 +4,7 @@ import ToDoList from './ToDoList.js'
 import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
+import ChangeText_Transaction from './transactions/ChangeText_Transaction.js'
 
 /**
  * ToDoModel
@@ -186,4 +187,16 @@ export default class ToDoModel {
             this.tps.undoTransaction();
         }
     } 
+
+    changeTextTransaction(newText, listItem){
+        let transaction = new ChangeText_Transaction(this, newText, listItem);
+        this.tps.addTransaction(transaction);
+    }
+
+    changeText(text, listItem){
+        let oldText = listItem.getDescription();
+        listItem.setDescription(text);
+        this.view.viewList(this.currentList);
+        return oldText;
+    }
 }
