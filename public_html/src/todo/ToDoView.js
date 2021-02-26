@@ -138,6 +138,10 @@ export default class ToDoView {
             else{
                 inputDown.classList.remove("todo_button");
             }
+            let inputDelete = document.getElementById("todo-list-item-" + listItem.id).childNodes[3].childNodes[5];
+            inputDelete.onclick = function(){
+                thisController.handleDeleteItem(listItem);
+            }
         }
     }
 

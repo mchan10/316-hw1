@@ -66,4 +66,8 @@ export default class ToDoController {
     handleDownMove(listItem){
         this.model.moveDownTransaction(listItem);
     }
+
+    handleDeleteItem(listItem){
+        this.model.deleteItemTransaction(listItem);
+    }
 }
