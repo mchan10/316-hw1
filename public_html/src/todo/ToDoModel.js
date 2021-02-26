@@ -5,6 +5,10 @@ import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import ChangeText_Transaction from './transactions/ChangeText_Transaction.js'
+import ChangeDate_Transaction from './transactions/ChangeDate_Transaction.js'
+import ChangeStatus_Transaction from './transactions/ChangeStatus_Transaction.js'
+import MoveUp_Transaction from './transactions/MoveUp_Transaction.js'
+import MoveDown_Transaction from './transactions/MoveDown_Transaction.js'
 
 /**
  * ToDoModel
@@ -199,4 +203,53 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
         return oldText;
     }
+
+    changeDateTransaction(newDate, listItem){
+        let transaction = new ChangeDate_Transaction(this, newDate, listItem);
+        this.tps.addTransaction(transaction);
+    }
+
+    changeDate(date, listItem){
+        let oldDate = listItem.getDueDate();
+        listItem.setDueDate(date);
+        this.view.viewList(this.currentList);
+        return oldDate;
+    }
+
+    changeStatusTransaction(newStatus, listItem){
+        let transaction = new ChangeStatus_Transaction(this, newStatus, listItem);
+        this.tps.addTransaction(transaction);
+    }
+
+    changeStatus(status, listItem){
+        let oldStatus = listItem.getStatus();
+        listItem.setStatus(status);
+        this.view.viewList(this.currentList);
+        return oldStatus;
+    }
+    
+    moveUpTransaction(listItem){
+        let transaction = new MoveUp_Transaction(this, listItem);
+        this.tps.addTransaction(transaction);
+    }
+
+    moveUp(listItem){
+        let currentPos = this.currentList.getIndexOfItem(listItem);
+        this.currentList.removeItem(listItem);
+        this.currentList.addElementToIndex(currentPos - 1, listItem);
+        this.view.viewList(this.currentList);
+    }
+
+    moveDown(listItem){
+        let currentPos = this.currentList.getIndexOfItem(listItem);
+        this.currentList.removeItem(listItem);
+        this.currentList.addElementToIndex(currentPos + 1, listItem);
+        this.view.viewList(this.currentList);
+    }
+
+    moveDownTransaction(listItem){
+        let transaction = new MoveDown_Transaction(this, listItem);
+        this.tps.addTransaction(transaction);
+    }
+
 }

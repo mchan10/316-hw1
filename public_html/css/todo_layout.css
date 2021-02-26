@@ -124,3 +124,13 @@
 .list-item{
     position:absolute;
 }
+
+.input-date{
+    position: absolute;
+    display: none;
+}
+
+.input-status{
+    position: absolute;
+    display: none;
+}

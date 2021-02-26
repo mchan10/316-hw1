@@ -83,4 +83,8 @@ export default class ToDoList {
         this.removeItem(item);
         this.items.unshift(item);
     }
+
+    addElementToIndex(index, item){
+        this.items.splice(index, 0, item);
+    }
 }

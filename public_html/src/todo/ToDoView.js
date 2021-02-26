@@ -63,14 +63,17 @@ export default class ToDoView {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col'>" + "<input type='text' class='input-text' value='" + listItem.description +"'>"
+                                + "<div class='task-col'>" + "<input type='text' class='input-text' value='" + listItem.description + "'>"
                                 + "</input>" + "<span class='list-item'>" + listItem.description + "</span></div>"
-                                + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
-                                + "<div class='status-col'>" + listItem.status + "</div>"
+                                + "<div class='due-date-col'>" + "<input type='date' class='input-date' value='" + listItem.dueDate + "'>"
+                                + "</input>" + "<span class='list-date'>" + listItem.dueDate + "</span></div>"
+                                + "<div class='status-col'>" + "<select class='input-status'>" + "<option value='' style='display:none'>" + listItem.status + "</option>"
+                                + "<option value='1'> complete </option>" + "<option value='2'> incomplete </option></select>"
+                                + "<span class='list-status'>" + listItem.status + "</span></div>"
                                 + "<div class='list-controls-col'>"
-                                + " <div class='list-item-control material-icons'>keyboard_arrow_up</div>"
-                                + " <div class='list-item-control material-icons'>keyboard_arrow_down</div>"
-                                + " <div class='list-item-control material-icons'>close</div>"
+                                + " <div class='list-item-control material-icons todo_button'>keyboard_arrow_up</div>"
+                                + " <div class='list-item-control material-icons todo_button'>keyboard_arrow_down</div>"
+                                + " <div class='list-item-control material-icons todo_button'>close</div>"
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
@@ -87,6 +90,53 @@ export default class ToDoView {
                 inputDesc.getElementsByTagName("span")[0].style.display = "block";
                 inputDesc.getElementsByTagName("span")[0].innerHTML = inputDesc.getElementsByTagName("input")[0].value;
                 thisController.handleDescChange(inputDesc.getElementsByTagName("input")[0].value, listItem);
+            }
+            let inputDate = document.getElementById("todo-list-item-" + listItem.id).childNodes[1];
+            inputDate.onclick = function(){
+                inputDate.getElementsByTagName("span")[0].style.display = "none";
+                inputDate.getElementsByTagName("input")[0].style.display = "block";
+                inputDate.getElementsByTagName("input")[0].focus();
+            }
+            inputDate.getElementsByTagName("input")[0].onblur = function(){
+                inputDate.getElementsByTagName("input")[0].style.display = "none";
+                inputDate.getElementsByTagName("span")[0].style.display = "block";
+                inputDate.getElementsByTagName("span")[0].innerHTML = inputDate.getElementsByTagName("input")[0].value;
+                thisController.handleDateChange(inputDate.getElementsByTagName("input")[0].value, listItem);
+            }
+            let inputStatus = document.getElementById("todo-list-item-" + listItem.id).childNodes[2];
+            inputStatus.onclick = function(){
+                inputStatus.getElementsByTagName("span")[0].style.display = "none";
+                inputStatus.getElementsByTagName("select")[0].style.display = "block";
+                inputStatus.getElementsByTagName("select")[0].focus();
+            }
+            inputStatus.getElementsByTagName("select")[0].onblur = function(){
+                inputStatus.getElementsByTagName("select")[0].style.display = "none";
+                inputStatus.getElementsByTagName("span")[0].style.display = "block";
+                if (inputStatus.getElementsByTagName("select")[0].value == 1){
+                    inputStatus.getElementsByTagName("span")[0].innerHTML = "complete";
+                }
+                else{
+                    inputStatus.getElementsByTagName("span")[0].innerHTML = "incomplete";
+                }
+                thisController.handleStatusChange(inputStatus.getElementsByTagName("span")[0].innerHTML, listItem);
+            }
+            let inputUp = document.getElementById("todo-list-item-" + listItem.id).childNodes[3].childNodes[1];
+            if (i != 0){
+                inputUp.onclick = function(){
+                    thisController.handleUpMove(listItem);
+                }
+            }
+            else{
+                inputUp.classList.remove("todo_button");
+            }
+            let inputDown = document.getElementById("todo-list-item-" + listItem.id).childNodes[3].childNodes[3];
+            if (i != list.items.length - 1){
+                inputDown.onclick = function(){
+                    thisController.handleDownMove(listItem);
+                }
+            }
+            else{
+                inputDown.classList.remove("todo_button");
             }
         }
     }

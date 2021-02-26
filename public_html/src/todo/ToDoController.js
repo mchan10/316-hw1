@@ -50,4 +50,20 @@ export default class ToDoController {
     handleDescChange(newText, listItem){ 
         this.model.changeTextTransaction(newText, listItem);
     }
+
+    handleDateChange(newDate, listItem){
+        this.model.changeDateTransaction(newDate, listItem);
+    }
+
+    handleStatusChange(newStatus, listItem){
+        this.model.changeStatusTransaction(newStatus, listItem);
+    }
+
+    handleUpMove(listItem){
+        this.model.moveUpTransaction(listItem);
+    }
+
+    handleDownMove(listItem){
+        this.model.moveDownTransaction(listItem);
+    }
 }
