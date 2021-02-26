@@ -86,6 +86,8 @@ export default class ToDoModel {
         }
         let transaction = new AddNewItem_Transaction(this);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     /**
@@ -98,6 +100,8 @@ export default class ToDoModel {
      */
     addNewList(initName) {
         this.tps.clearAllTransactions();
+        this.updateRedo();
+        this.updateUndo();
         let newList = new ToDoList(this.nextListId++);
         if (initName)
             newList.setName(initName);
@@ -150,13 +154,11 @@ export default class ToDoModel {
      * Redo the current transaction if there is one.
      */
     redo() {
-        if (this.lastEditedList != this.currentList){
-            this.tps.clearAllTransactions();
-            this.lastEditedList = this.currentList;
-        }
         if (this.tps.hasTransactionToRedo()) {
             this.tps.doTransaction();
         }
+        this.updateRedo();
+        this.updateUndo();
     }   
 
     /**
@@ -199,13 +201,11 @@ export default class ToDoModel {
      * Undo the most recently done transaction if there is one.
      */
     undo() {
-        if (this.lastEditedList != this.currentList){
-            this.tps.clearAllTransactions();
-            this.lastEditedList = this.currentList;
-        }
         if (this.tps.hasTransactionToUndo()) {
             this.tps.undoTransaction();
         }
+        this.updateRedo();
+        this.updateUndo();
     } 
 
     changeTextTransaction(newText, listItem){
@@ -215,6 +215,8 @@ export default class ToDoModel {
         }
         let transaction = new ChangeText_Transaction(this, newText, listItem);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     changeText(text, listItem){
@@ -231,6 +233,8 @@ export default class ToDoModel {
         }
         let transaction = new ChangeDate_Transaction(this, newDate, listItem);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     changeDate(date, listItem){
@@ -247,6 +251,8 @@ export default class ToDoModel {
         }
         let transaction = new ChangeStatus_Transaction(this, newStatus, listItem);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     changeStatus(status, listItem){
@@ -263,6 +269,8 @@ export default class ToDoModel {
         }
         let transaction = new MoveUp_Transaction(this, listItem);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     moveUp(listItem){
@@ -286,6 +294,8 @@ export default class ToDoModel {
         }
         let transaction = new MoveDown_Transaction(this, listItem);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     deleteItemTransaction(listItem){
@@ -295,6 +305,8 @@ export default class ToDoModel {
         }
         let transaction = new DeleteItem_Transaction(this, listItem);
         this.tps.addTransaction(transaction);
+        this.updateRedo();
+        this.updateUndo();
     }
 
     deleteItem(listItem){
@@ -313,5 +325,13 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.refreshLists(this.toDoLists);
         this.view.clearItemsList();
+    }
+
+    updateRedo(){
+        this.view.updateRedo(this.tps.hasTransactionToRedo());
+    }
+
+    updateUndo(){
+        this.view.updateUndo(this.tps.hasTransactionToUndo());
     }
 }

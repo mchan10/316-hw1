@@ -1,5 +1,7 @@
 'use strict'
 
+import ToDoModel from "./ToDoModel.js";
+
 /**
  * ToDoView
  * 
@@ -58,6 +60,10 @@ export default class ToDoView {
 
         // GET RID OF ALL THE ITEMS
         this.clearItemsList();
+
+        if (list == null){
+            return;
+        }
 
         for (let i = 0; i < list.items.length; i++) {
             // NOW BUILD ALL THE LIST ITEMS
@@ -150,7 +156,6 @@ export default class ToDoView {
                 thisController.handleDeleteItem(listItem);
             }
         }
-        
     }
 
     // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES
@@ -166,5 +171,23 @@ export default class ToDoView {
     hideModal(){
         let modal = document.getElementById("modal-overlay");
         modal.style.display = "none";
+    }
+    
+    updateRedo(possible){
+        if (possible){
+            document.getElementById("redo-button").classList.add("todo_button");
+        }
+        else{
+            document.getElementById("redo-button").classList.remove("todo_button");
+        }
+    }
+
+    updateUndo(possible){
+        if (possible){
+            document.getElementById("undo-button").classList.add("todo_button");
+        }
+        else{
+            document.getElementById("undo-button").classList.remove("todo_button");
+        }
     }
 }
