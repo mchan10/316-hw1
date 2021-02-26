@@ -190,4 +190,26 @@ export default class ToDoView {
             document.getElementById("undo-button").classList.remove("todo_button");
         }
     }
+
+    updateAddList(list){
+        if (list == null){
+            document.getElementById("add-list-button").classList.add("todo_button");
+        }
+        else{
+            document.getElementById("add-list-button").classList.remove("todo_button");
+        }
+    }
+
+    updateListEdit(list){
+        if (list == null){
+            document.getElementById("delete-list-button").classList.remove("todo_button");
+            document.getElementById("add-item-button").classList.remove("todo_button");
+            document.getElementById("close-list-button").classList.remove("todo_button");
+        }
+        else{
+            document.getElementById("delete-list-button").classList.add("todo_button");
+            document.getElementById("add-item-button").classList.add("todo_button");
+            document.getElementById("close-list-button").classList.add("todo_button");
+        }
+    }
 }

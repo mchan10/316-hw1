@@ -30,7 +30,9 @@ export default class ToDoController {
             }
         }
         document.getElementById("delete-list-button").onmousedown = function() {
-            appModel.showModal();
+            if (document.getElementById("delete-list-button").classList.contains("todo_button")){
+                appModel.showModal();
+            }
         }
         document.getElementById("confirm-delete-exit").onmousedown = function(){
             appModel.hideModal();
@@ -42,10 +44,14 @@ export default class ToDoController {
             appModel.removeCurrentList();
         }
         document.getElementById("add-item-button").onmousedown = function(){
-            appModel.addNewItemTransaction();
+            if (document.getElementById("add-item-button").classList.contains("todo_button")){
+                appModel.addNewItemTransaction();
+            }
         }  
         document.getElementById("close-list-button").onmousedown = function(){
-            appModel.closeList();
+            if (document.getElementById("close-list-button").classList.contains("todo_button")){
+                appModel.closeList();
+            }
         }
     }
     

@@ -148,6 +148,8 @@ export default class ToDoModel {
             this.view.refreshLists(this.toDoLists);
             this.view.viewList(this.currentList);
         }
+        this.updateAddList();
+        this.updateListEdit();
     }
 
     /**
@@ -190,6 +192,8 @@ export default class ToDoModel {
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
         this.view.hideModal();
+        this.updateAddList();
+        this.updateListEdit();
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
@@ -325,6 +329,8 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.refreshLists(this.toDoLists);
         this.view.clearItemsList();
+        this.updateAddList();
+        this.updateListEdit();
     }
 
     updateRedo(){
@@ -333,5 +339,13 @@ export default class ToDoModel {
 
     updateUndo(){
         this.view.updateUndo(this.tps.hasTransactionToUndo());
+    }
+
+    updateAddList(){
+        this.view.updateAddList(this.currentList);
+    }
+
+    updateListEdit(){
+        this.view.updateListEdit(this.currentList);
     }
 }
