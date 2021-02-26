@@ -32,6 +32,8 @@ export default class ToDoModel {
 
         // WE'LL USE THIS TO ASSIGN ID NUMBERS TO EVERY LIST ITEM
         this.nextListItemId = 0;
+
+        this.lastEditedList = null;
     }
 
     /**
@@ -78,6 +80,10 @@ export default class ToDoModel {
      * Creates a new transaction for adding an item and adds it to the transaction stack.
      */
     addNewItemTransaction() {
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new AddNewItem_Transaction(this);
         this.tps.addTransaction(transaction);
     }
@@ -91,6 +97,7 @@ export default class ToDoModel {
      * @param {*} initName The name of this to add.
      */
     addNewList(initName) {
+        this.tps.clearAllTransactions();
         let newList = new ToDoList(this.nextListId++);
         if (initName)
             newList.setName(initName);
@@ -143,6 +150,10 @@ export default class ToDoModel {
      * Redo the current transaction if there is one.
      */
     redo() {
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         if (this.tps.hasTransactionToRedo()) {
             this.tps.doTransaction();
         }
@@ -188,12 +199,20 @@ export default class ToDoModel {
      * Undo the most recently done transaction if there is one.
      */
     undo() {
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         if (this.tps.hasTransactionToUndo()) {
             this.tps.undoTransaction();
         }
     } 
 
     changeTextTransaction(newText, listItem){
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new ChangeText_Transaction(this, newText, listItem);
         this.tps.addTransaction(transaction);
     }
@@ -206,6 +225,10 @@ export default class ToDoModel {
     }
 
     changeDateTransaction(newDate, listItem){
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new ChangeDate_Transaction(this, newDate, listItem);
         this.tps.addTransaction(transaction);
     }
@@ -218,6 +241,10 @@ export default class ToDoModel {
     }
 
     changeStatusTransaction(newStatus, listItem){
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new ChangeStatus_Transaction(this, newStatus, listItem);
         this.tps.addTransaction(transaction);
     }
@@ -230,6 +257,10 @@ export default class ToDoModel {
     }
     
     moveUpTransaction(listItem){
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new MoveUp_Transaction(this, listItem);
         this.tps.addTransaction(transaction);
     }
@@ -249,11 +280,19 @@ export default class ToDoModel {
     }
 
     moveDownTransaction(listItem){
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new MoveDown_Transaction(this, listItem);
         this.tps.addTransaction(transaction);
     }
 
     deleteItemTransaction(listItem){
+        if (this.lastEditedList != this.currentList){
+            this.tps.clearAllTransactions();
+            this.lastEditedList = this.currentList;
+        }
         let transaction = new DeleteItem_Transaction(this, listItem);
         this.tps.addTransaction(transaction);
     }
@@ -268,10 +307,6 @@ export default class ToDoModel {
     addItem(index, listItem){
         this.currentList.addElementToIndex(index, listItem);
         this.view.viewList(this.currentList);
-    }
-
-    resetTransactions(){
-        this.tps.clearAllTransactions();
     }
 
     closeList(){

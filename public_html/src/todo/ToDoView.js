@@ -88,8 +88,10 @@ export default class ToDoView {
             inputDesc.getElementsByTagName("input")[0].onblur = function(){
                 inputDesc.getElementsByTagName("input")[0].style.display = "none";
                 inputDesc.getElementsByTagName("span")[0].style.display = "block";
-                inputDesc.getElementsByTagName("span")[0].innerHTML = inputDesc.getElementsByTagName("input")[0].value;
-                thisController.handleDescChange(inputDesc.getElementsByTagName("input")[0].value, listItem);
+                //inputDesc.getElementsByTagName("span")[0].innerHTML = inputDesc.getElementsByTagName("input")[0].value;
+                if (inputDesc.getElementsByTagName("span")[0].innerHTML != inputDesc.getElementsByTagName("input")[0].value){
+                    thisController.handleDescChange(inputDesc.getElementsByTagName("input")[0].value, listItem);
+                }
             }
             let inputDate = document.getElementById("todo-list-item-" + listItem.id).childNodes[1];
             inputDate.onclick = function(){
@@ -100,8 +102,10 @@ export default class ToDoView {
             inputDate.getElementsByTagName("input")[0].onblur = function(){
                 inputDate.getElementsByTagName("input")[0].style.display = "none";
                 inputDate.getElementsByTagName("span")[0].style.display = "block";
-                inputDate.getElementsByTagName("span")[0].innerHTML = inputDate.getElementsByTagName("input")[0].value;
-                thisController.handleDateChange(inputDate.getElementsByTagName("input")[0].value, listItem);
+                //inputDate.getElementsByTagName("span")[0].innerHTML = inputDate.getElementsByTagName("input")[0].value;
+                if (inputDate.getElementsByTagName("span")[0].innerHTML != inputDate.getElementsByTagName("input")[0].value){
+                    thisController.handleDateChange(inputDate.getElementsByTagName("input")[0].value, listItem);
+                }
             }
             let inputStatus = document.getElementById("todo-list-item-" + listItem.id).childNodes[2];
             inputStatus.onclick = function(){
@@ -112,13 +116,16 @@ export default class ToDoView {
             inputStatus.getElementsByTagName("select")[0].onblur = function(){
                 inputStatus.getElementsByTagName("select")[0].style.display = "none";
                 inputStatus.getElementsByTagName("span")[0].style.display = "block";
+                let newStatus;
                 if (inputStatus.getElementsByTagName("select")[0].value == 1){
-                    inputStatus.getElementsByTagName("span")[0].innerHTML = "complete";
+                    newStatus = "complete";
                 }
                 else{
-                    inputStatus.getElementsByTagName("span")[0].innerHTML = "incomplete";
+                    newStatus = "incomplete";
                 }
-                thisController.handleStatusChange(inputStatus.getElementsByTagName("span")[0].innerHTML, listItem);
+                if (newStatus != inputStatus.getElementsByTagName("span")[0].innerHTML){
+                    thisController.handleStatusChange(newStatus, listItem);
+                }
             }
             let inputUp = document.getElementById("todo-list-item-" + listItem.id).childNodes[3].childNodes[1];
             if (i != 0){
@@ -143,6 +150,7 @@ export default class ToDoView {
                 thisController.handleDeleteItem(listItem);
             }
         }
+        
     }
 
     // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES
