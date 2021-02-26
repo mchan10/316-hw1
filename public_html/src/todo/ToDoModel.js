@@ -269,4 +269,14 @@ export default class ToDoModel {
         this.currentList.addElementToIndex(index, listItem);
         this.view.viewList(this.currentList);
     }
+
+    resetTransactions(){
+        this.tps.clearAllTransactions();
+    }
+
+    closeList(){
+        this.currentList = null;
+        this.view.refreshLists(this.toDoLists);
+        this.view.clearItemsList();
+    }
 }

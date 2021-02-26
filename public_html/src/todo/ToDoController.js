@@ -22,6 +22,7 @@ export default class ToDoController {
         }
         document.getElementById("redo-button").onmousedown = function() {
             appModel.redo();
+            document.getElementById("redo-button").disabled = "true";
         }
         document.getElementById("delete-list-button").onmousedown = function() {
             appModel.showModal();
@@ -35,10 +36,12 @@ export default class ToDoController {
         document.getElementById("confirm-delete-confirm").onmousedown = function(){
             appModel.removeCurrentList();
         }
-        document.getElementById("add-item-button").onmousedown = function() {
+        document.getElementById("add-item-button").onmousedown = function(){
             appModel.addNewItemTransaction();
         }  
-        //document.getElementById("confirm-deletion").onmousedown = 
+        document.getElementById("close-list-button").onmousedown = function(){
+            appModel.closeList();
+        }
     }
     
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD
