@@ -93,6 +93,7 @@
 }
 
 .task-col {
+    position: relative;
     width:25%;
 }
 
@@ -115,8 +116,11 @@
 }
 
 .input-text{
-    position: relative;
+    position: absolute;
     display: none;
-    width: 98%;
-    height: 85%;
+    width:95%;
+}
+
+.list-item{
+    position:absolute;
 }
