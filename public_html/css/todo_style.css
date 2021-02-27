@@ -86,7 +86,7 @@ body{
 }
 
 .todo_button:hover {
-    background-color: var(--swatch-contrast);
+    background-color: rgba(255,255,255, 0.7);
 }
 
 .input-text{
@@ -95,4 +95,20 @@ body{
 
 .selected-list{
     background-color: var(--swatch-accent);
+}
+
+.complete-status{
+    color: #8ed4f8;
+}
+
+.incomplete-status{
+    color: #f5bc75;
+}
+
+.selected-list{
+    background-color: var(--swatch-accent);
+}
+
+.list-item-card:hover{
+    background-color: var(--swatch-contrast);
 }

@@ -106,7 +106,7 @@ export default class ToDoModel {
         if (initName)
             newList.setName(initName);
         this.toDoLists.push(newList);
-        this.view.appendNewListToView(newList);
+        this.view.appendNewListToView(newList, false);
         return newList;
     }
 
@@ -148,6 +148,7 @@ export default class ToDoModel {
             this.view.refreshLists(this.toDoLists);
             this.view.viewList(this.currentList);
         }
+        this.view.selectListYellow(listId);
         this.updateAddList();
         this.updateListEdit();
     }

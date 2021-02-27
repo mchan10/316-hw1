@@ -19,7 +19,7 @@ export default class ToDoView {
         let newListId = "todo-list-" + newList.id;
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
-        listElement.setAttribute("class", "todo_button");
+        listElement.setAttribute("class", "todo_button todo-list");
         listElement.appendChild(document.createTextNode(newList.name));
         listsElement.appendChild(listElement);
 
@@ -155,6 +155,12 @@ export default class ToDoView {
             inputDelete.onclick = function(){
                 thisController.handleDeleteItem(listItem);
             }
+            if (inputStatus.innerHTML == "complete"){
+                inputStatus.getElementsByTagName("span")[0].classList.add("complete-status");
+            }
+            else{
+                inputStatus.getElementsByTagName("span")[0].classList.add("incomplete-status");
+            }
         }
     }
 
@@ -211,5 +217,10 @@ export default class ToDoView {
             document.getElementById("add-item-button").classList.add("todo_button");
             document.getElementById("close-list-button").classList.add("todo_button");
         }
+    }
+
+    selectListYellow(listId){
+        let list = document.getElementById("todo-list-" + listId);
+        list.classList.add("selected-list");
     }
 }
