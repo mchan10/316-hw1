@@ -84,4 +84,8 @@ export default class ToDoController {
     handleDeleteItem(listItem){
         this.model.deleteItemTransaction(listItem);
     }
+
+    handleListNameChange(listId, newName){
+        this.model.listNameChange(listId, newName);
+    }
 }

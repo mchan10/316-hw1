@@ -22,12 +22,27 @@ export default class ToDoView {
         listElement.setAttribute("class", "todo_button todo-list");
         listElement.appendChild(document.createTextNode(newList.name));
         listsElement.appendChild(listElement);
-
+        let inputElement = document.createElement("input");
+        inputElement.setAttribute("class", "input-list-text");
+        inputElement.setAttribute("value", listElement.innerHTML);
+        listsElement.appendChild(inputElement);
+        listElement.onclick = function(event){
+            if(event.detail == 1){
+                thisController.handleLoadList(newList.id);
+            }
+            if (event.detail == 2){
+                inputElement.style.display = "block";
+                listElement.style.display = "none";
+                inputElement.focus();
+            }
+        }
+        inputElement.onblur = function(){
+            inputElement.style.display = "none";
+            listElement.style.display = "block";
+            thisController.handleListNameChange(newList.id, inputElement.value);
+        }
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
-        listElement.onmousedown = function() {
-            thisController.handleLoadList(newList.id);
-        }
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
@@ -155,7 +170,7 @@ export default class ToDoView {
             inputDelete.onclick = function(){
                 thisController.handleDeleteItem(listItem);
             }
-            if (inputStatus.innerHTML == "complete"){
+            if (inputStatus.getElementsByTagName("span")[0].innerHTML == "complete"){
                 inputStatus.getElementsByTagName("span")[0].classList.add("complete-status");
             }
             else{

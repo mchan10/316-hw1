@@ -61,7 +61,7 @@ body{
 }
 
 #todo-list-header-card{
-    border-bottom: 2px dotted;
+    border-bottom: dotted;
 }
 
 #confirm-deletion{
@@ -95,10 +95,12 @@ body{
 
 .input-text{
     background-color: var(--swatch-primary);
+    border: none;
+    outline: none;
 }
 
 .selected-list{
-    background-color: var(--swatch-accent);
+    color: var(--swatch-accent);
 }
 
 .complete-status{
@@ -109,10 +111,14 @@ body{
     color: #f5bc75;
 }
 
-.selected-list{
-    background-color: var(--swatch-accent);
+.list-item-card:hover{
+    background-color: rgb(87, 93, 105);
 }
 
-.list-item-card:hover{
-    background-color: var(--swatch-contrast);
+.input-list-text{
+    background-color: var(--swatch-primary);
+    border: none;
+    outline: none;
+    color:white;
+    background-color: var(--swatch-complement);
 }

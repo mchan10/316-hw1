@@ -120,6 +120,11 @@ export default class ToDoModel {
         return newItem;
     }
 
+    addItemToList(item){
+        this.currentList.items.push(item);
+        this.view.viewList(this.currentList);
+    }
+
     /**
      * Makes a new list item with the provided data and adds it to the list.
      */
@@ -175,6 +180,7 @@ export default class ToDoModel {
     showModal(){
         this.view.showModal();
     }
+
     hideModal(){
         this.view.hideModal();
     }
@@ -348,5 +354,15 @@ export default class ToDoModel {
 
     updateListEdit(){
         this.view.updateListEdit(this.currentList);
+    }
+
+    listNameChange(listId, newName){
+        for(let i = 0; i < this.toDoLists.length; i++){
+            if (this.toDoLists[i].getId() == Number(listId)){
+                this.toDoLists[i].setName(newName);
+                
+            }
+        }
+        this.view.refreshLists(this.toDoLists);
     }
 }

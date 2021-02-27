@@ -12,7 +12,12 @@ export default class AddNewItem_Transaction extends jsTPS_Transaction {
 
     doTransaction() {
         // MAKE A NEW ITEM
-        this.itemAdded = this.model.addNewItem();
+        if (this.itemAdded == null){
+            this.itemAdded = this.model.addNewItem();
+        }
+        else{
+            this.model.addItemToList(this.itemAdded);
+        }
     }
 
     undoTransaction() {
