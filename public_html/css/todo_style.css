@@ -72,6 +72,10 @@ body{
     background-color: rgba(0, 0, 0, 0.5)
 }
 
+#modal-text{
+    border-bottom: dotted;
+}
+
 .list-header-card {
     border-bottom: dotted;
 }

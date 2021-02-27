@@ -80,7 +80,7 @@ body {
     position: absolute;
     left: 85%;
     top: 10%;
-    width: 15%;
+    width: 10%;
     height: 20%;
 }
 #confirm-delete-cancel{
@@ -107,6 +107,12 @@ body {
     width:100%;
     height:100%;
     overflow:hidden;
+}
+
+#modal-text{
+    display:flex;
+    height:50%;
+    margin-left:5%;
 }
 
 .list-item-card {
