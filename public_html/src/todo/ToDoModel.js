@@ -364,6 +364,6 @@ export default class ToDoModel {
             }
         }
         this.view.refreshLists(this.toDoLists);
-        this.view.selectListYellow(listId);
+        this.view.selectListYellow(this.currentList.id);
     }
 }
